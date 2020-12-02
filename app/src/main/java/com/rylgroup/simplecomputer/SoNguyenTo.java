@@ -2,6 +2,8 @@ package com.rylgroup.simplecomputer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -37,10 +39,15 @@ public class SoNguyenTo extends AppCompatActivity {
     }
 
     void onClickTinhKQ(View v) {
-        int n = getIntFromEditText(editNguyenTo);
-        boolean laSoNT = isSoNguyenTo(n);
+        try {
+            int n = getIntFromEditText(editNguyenTo);
+            boolean laSoNT = isSoNguyenTo(n);
 
-        setKQ(textKQ, laSoNT);
+            setKQ(textKQ, laSoNT);
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Lỗi", "Dữ liệu đầu vào không hợp lệ");
+        }
     }
 
     int getIntFromEditText(EditText editText) {
@@ -67,5 +74,17 @@ public class SoNguyenTo extends AppCompatActivity {
         } else {
             textView.setText("Không phải là số nguyên tố");
         }
+    }
+    void showAlert(String title, String message) {
+        AlertDialog alertDialog = new AlertDialog.Builder(SoNguyenTo.this).create();
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(message);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
     }
 }

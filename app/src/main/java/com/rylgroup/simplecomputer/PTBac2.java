@@ -2,6 +2,8 @@ package com.rylgroup.simplecomputer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -42,27 +44,33 @@ public class PTBac2 extends AppCompatActivity {
     }
 
     void onClickTinhKetQua(View v) {
-        int ax2 = getIntFromEditText(editAx2);
-        int bx = getIntFromEditText(editBx);
-        int c = getIntFromEditText(editC);
+        try {
+            int ax2 = getIntFromEditText(editAx2);
+            int bx = getIntFromEditText(editBx);
+            int c = getIntFromEditText(editC);
 
-        if (ax2 == 0) {
-            if (bx == 0) {
-                if (c == 0) {
-                    textKetQua.setText("Phương trình có vô số nghiệm");
+            if (ax2 == 0) {
+                if (bx == 0) {
+                    if (c == 0) {
+                        textKetQua.setText("Phương trình có vô số nghiệm");
+                    } else {
+                        textKetQua.setText("Phương trình vô nghiệm");
+                    }
                 } else {
-                    textKetQua.setText("Phương trình vô nghiệm");
+                    // PT bac Nhat
+                    float nghiem = tinhPTBacNhat(bx, c);
+                    textKetQua.setText(String.format("X = %f", nghiem));
                 }
             } else {
-                // PT bac Nhat
-                float nghiem = tinhPTBacNhat(bx, c);
-                textKetQua.setText(String.format("X = %f", nghiem));
-            }
-        } else {
-            ArrayList<Float> result = tinhPTBac2(ax2, bx, c);
+                ArrayList<Float> result = tinhPTBac2(ax2, bx, c);
 
-            setKQ(textKetQua, result);
+                setKQ(textKetQua, result);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Lỗi", "Dữ liệu đầu vào không hợp lệ");
         }
+
 
     }
 
@@ -115,5 +123,18 @@ public class PTBac2 extends AppCompatActivity {
     int getIntFromEditText(EditText editText) {
         String str = editText.getText().toString();
         return Integer.parseInt(str);
+    }
+
+    void showAlert(String title,String message) {
+        AlertDialog alertDialog = new AlertDialog.Builder(PTBac2.this).create();
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(message);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
     }
 }

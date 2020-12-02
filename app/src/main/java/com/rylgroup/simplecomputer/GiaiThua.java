@@ -2,6 +2,8 @@ package com.rylgroup.simplecomputer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -36,12 +38,17 @@ public class GiaiThua extends AppCompatActivity {
     }
 
     void onCLickTinhGiaThua(View v) {
-        int n = getIntFromEditText(editGiaiThua);
-        if (n > 20) {
-            long giaiThua = tinhGiaiThua(n);
-            setKQ(textKQ, giaiThua);
-        } else {
-            textKQ.setText("Input quá lớn để tính giai thừa");
+        try {
+            int n = getIntFromEditText(editGiaiThua);
+            if (n <= 20) {
+                long giaiThua = tinhGiaiThua(n);
+                setKQ(textKQ, giaiThua);
+            } else {
+                textKQ.setText("Input quá lớn để tính giai thừa");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Lỗi", "Dữ liệu đầu vào không hợp lệ");
         }
 
     }
@@ -61,5 +68,18 @@ public class GiaiThua extends AppCompatActivity {
 
     void setKQ(TextView textView, long giaiThua) {
         textView.setText(String.format("X = %d", giaiThua));
+    }
+
+    void showAlert(String title,String message) {
+        AlertDialog alertDialog = new AlertDialog.Builder(GiaiThua.this).create();
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(message);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
     }
 }
