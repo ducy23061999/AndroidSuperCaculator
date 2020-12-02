@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nhập phương trình bậc 1"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+    >
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="60dp"
+            android:id="@+id/Ea"
+            android:textSize="40dp"
+            android:inputType="numberSigned"
+            android:gravity="end"
+            android:textAlignment="textEnd"
+            android:height="60dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="x"
+            android:textSize="50dp"
+            android:id="@+id/TVx"
+            android:layout_toRightOf="@id/Ea"
+            android:layout_marginLeft="10dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:textSize="50dp"
+            android:id="@+id/TVplus"
+            android:layout_toRightOf="@id/TVx"
+            android:layout_marginLeft="10dp"
+            />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:width="60dp"
+            android:id="@+id/Eb"
+            android:height="60dp"
+            android:layout_toRightOf="@id/TVx"
+            android:layout_marginLeft="40dp"
+            android:textSize="40dp"
+            android:textAlignment="textEnd"
+            android:inputType="numberSigned"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="= 0"
+            android:id="@+id/TVResult"
+            android:layout_toRightOf="@id/Eb"
+            android:textSize="50dp"
+            android:layout_marginLeft="10dp"
+
+            />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kết quả: "
+            android:textSize="25dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/TVKq"
+            android:textSize="25dp"
+            android:text="X = ??"
+            android:layout_marginLeft="5dp"
+            />
+    </LinearLayout>
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Tính"
+        android:id="@+id/btnTinhKQ"
+        android:background="#3498db"
+        android:textColor="#ffff"
+        android:textSize="16dp"
+        />
+</LinearLayout>
